@@ -72,7 +72,7 @@ XXX
   cat <<EOF > config.oci.tfbackend
   bucket = "terraform-working"
   namespace = "テナンシに一意に付与されたネームスペース"
-  key = "oci-block-volume-attachmenttype-organize/terraform.tfstate"
+  key = "oci-vpc-flow-logs/terraform.tfstate"
   auth = "SecurityToken"
   config_file_profile = "ADMIN"
   region = "ap-tokyo-1"
