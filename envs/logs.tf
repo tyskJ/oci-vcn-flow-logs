@@ -27,3 +27,27 @@ resource "oci_core_capture_filter" "cf_vcn_flow_logs" {
     protocol         = "1"
   }
 }
+
+/************************************************************
+Logs
+************************************************************/
+##### VCN Flow Logs
+resource "oci_logging_log" "vcn_flow_logs" {
+  display_name = "logs-vcn-flow-logs-points-vcn"
+  is_enabled   = true
+  log_type     = "SERVICE"
+  configuration {
+    compartment_id = oci_identity_compartment.workload.id
+    source {
+      source_type = "OCISERVICE"
+      service     = "flowlogs"
+      category    = "vcn"
+      resource    = oci_core_vcn.vcn.id
+      parameters = {
+        capture_filter = oci_core_capture_filter.cf_vcn_flow_logs.id
+      }
+    }
+  }
+  log_group_id       = oci_logging_log_group.lg_vcn_flow_logs.id
+  retention_duration = 30
+}
