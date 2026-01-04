@@ -72,7 +72,7 @@ OCI VCN Flow Logs で L4 レベルのトラフィックを可視化する
   cat <<EOF > config.oci.tfbackend
   bucket = "terraform-working"
   namespace = "テナンシに一意に付与されたネームスペース"
-  key = "oci-vpc-flow-logs/terraform.tfstate"
+  key = "oci-vcn-flow-logs/terraform.tfstate"
   auth = "SecurityToken"
   config_file_profile = "ADMIN"
   region = "ap-tokyo-1"
