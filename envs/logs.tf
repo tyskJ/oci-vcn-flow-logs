@@ -1,19 +1,19 @@
 /************************************************************
 Log Group
 ************************************************************/
-##### For VPC Flow Logs
-resource "oci_logging_log_group" "lg_vpc_flow_logs" {
+##### For VCN Flow Logs
+resource "oci_logging_log_group" "lg_vcn_flow_logs" {
   compartment_id = oci_identity_compartment.workload.id
-  display_name   = "lg-vpc-flow-logs"
-  description    = "For VPC Flow Logs"
+  display_name   = "lg-vcn-flow-logs"
+  description    = "For VCN Flow Logs"
 }
 
 /************************************************************
 Capture Filter - Flow log
 ************************************************************/
-resource "oci_core_capture_filter" "cf_vpc_flow_logs" {
+resource "oci_core_capture_filter" "cf_vcn_flow_logs" {
   compartment_id = oci_identity_compartment.workload.id
-  display_name   = "cf-vpc-flow-logs"
+  display_name   = "cf-vcn-flow-logs"
   filter_type    = "FLOWLOG"
   # ICMP Rule
   flow_log_capture_filter_rules {
