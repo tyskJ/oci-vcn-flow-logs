@@ -51,3 +51,33 @@ resource "oci_logging_log" "vcn_flow_logs" {
   log_group_id       = oci_logging_log_group.lg_vcn_flow_logs.id
   retention_duration = 30
 }
+
+/************************************************************
+Exec (Local)
+************************************************************/
+##### TimeWait
+# cloud-init実行によりComputeが再起動するため
+resource "terraform_data" "wait_oracle" {
+  input = oci_core_instance.oracle_instance.id
+}
+
+resource "time_sleep" "wait_oracle_cloud_init_finish" {
+  depends_on      = [terraform_data.wait_oracle]
+  create_duration = "5m"
+}
+
+##### Ping
+resource "terraform_data" "local_exec_ping" {
+  depends_on = [
+    time_sleep.wait_oracle_cloud_init_finish,
+    oci_core_route_table_attachment.attachment,
+    oci_core_network_security_group_security_rule.sg_rule_2,
+    oci_logging_log.vcn_flow_logs
+  ]
+  provisioner "local-exec" {
+    command = <<EOT
+      echo Test Ping
+      ping ${oci_core_instance.oracle_instance.public_ip} -c 5
+    EOT
+  }
+}
