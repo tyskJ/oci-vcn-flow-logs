@@ -37,6 +37,7 @@ resource "oci_logging_log" "vcn_flow_logs" {
   is_enabled   = true
   log_type     = "SERVICE"
   configuration {
+    # 対象リソース及びキャプチャフィルタのコンパートメントが一致していること
     compartment_id = oci_identity_compartment.workload.id
     source {
       source_type = "OCISERVICE"
