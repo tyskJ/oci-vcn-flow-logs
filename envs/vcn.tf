@@ -6,6 +6,10 @@ resource "oci_core_vcn" "vcn" {
   cidr_block     = "10.0.0.0/16"
   display_name   = "vcn"
   dns_label      = "vcn"
+  defined_tags = {
+    format("%s.%s", oci_identity_tag_namespace.common.name, oci_identity_tag_default.key_env.tag_definition_name)                = "prd"
+    format("%s.%s", oci_identity_tag_namespace.common.name, oci_identity_tag_default.key_managedbyterraform.tag_definition_name) = "true"
+  }
 }
 
 /************************************************************
@@ -15,6 +19,10 @@ resource "oci_core_security_list" "sl" {
   compartment_id = oci_identity_compartment.workload.id
   vcn_id         = oci_core_vcn.vcn.id
   display_name   = "nothing-security-list"
+  defined_tags = {
+    format("%s.%s", oci_identity_tag_namespace.common.name, oci_identity_tag_default.key_env.tag_definition_name)                = "prd"
+    format("%s.%s", oci_identity_tag_namespace.common.name, oci_identity_tag_default.key_managedbyterraform.tag_definition_name) = "true"
+  }
 }
 
 /************************************************************
@@ -29,6 +37,10 @@ resource "oci_core_subnet" "public" {
   security_list_ids          = [oci_core_security_list.sl.id]
   prohibit_internet_ingress  = false
   prohibit_public_ip_on_vnic = false
+  defined_tags = {
+    format("%s.%s", oci_identity_tag_namespace.common.name, oci_identity_tag_default.key_env.tag_definition_name)                = "prd"
+    format("%s.%s", oci_identity_tag_namespace.common.name, oci_identity_tag_default.key_managedbyterraform.tag_definition_name) = "true"
+  }
 }
 
 /************************************************************
@@ -38,6 +50,10 @@ resource "oci_core_internet_gateway" "igw" {
   compartment_id = oci_identity_compartment.workload.id
   vcn_id         = oci_core_vcn.vcn.id
   display_name   = "igw"
+  defined_tags = {
+    format("%s.%s", oci_identity_tag_namespace.common.name, oci_identity_tag_default.key_env.tag_definition_name)                = "prd"
+    format("%s.%s", oci_identity_tag_namespace.common.name, oci_identity_tag_default.key_managedbyterraform.tag_definition_name) = "true"
+  }
 }
 
 /************************************************************
@@ -51,6 +67,10 @@ resource "oci_core_route_table" "rtb" {
     network_entity_id = oci_core_internet_gateway.igw.id
     destination       = "0.0.0.0/0"
     destination_type  = "CIDR_BLOCK"
+  }
+  defined_tags = {
+    format("%s.%s", oci_identity_tag_namespace.common.name, oci_identity_tag_default.key_env.tag_definition_name)                = "prd"
+    format("%s.%s", oci_identity_tag_namespace.common.name, oci_identity_tag_default.key_managedbyterraform.tag_definition_name) = "true"
   }
 }
 
@@ -66,6 +86,10 @@ resource "oci_core_network_security_group" "sg" {
   compartment_id = oci_identity_compartment.workload.id
   vcn_id         = oci_core_vcn.vcn.id
   display_name   = "sg"
+  defined_tags = {
+    format("%s.%s", oci_identity_tag_namespace.common.name, oci_identity_tag_default.key_env.tag_definition_name)                = "prd"
+    format("%s.%s", oci_identity_tag_namespace.common.name, oci_identity_tag_default.key_managedbyterraform.tag_definition_name) = "true"
+  }
 }
 
 resource "oci_core_network_security_group_security_rule" "sg_rule_1" {

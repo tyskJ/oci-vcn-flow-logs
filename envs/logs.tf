@@ -6,6 +6,10 @@ resource "oci_logging_log_group" "lg_vcn_flow_logs" {
   compartment_id = oci_identity_compartment.workload.id
   display_name   = "lg-vcn-flow-logs"
   description    = "For VCN Flow Logs"
+  defined_tags = {
+    format("%s.%s", oci_identity_tag_namespace.common.name, oci_identity_tag_default.key_env.tag_definition_name)                = "prd"
+    format("%s.%s", oci_identity_tag_namespace.common.name, oci_identity_tag_default.key_managedbyterraform.tag_definition_name) = "true"
+  }
 }
 
 /************************************************************
@@ -25,6 +29,10 @@ resource "oci_core_capture_filter" "cf_vcn_flow_logs" {
     source_cidr      = "0.0.0.0/0"
     destination_cidr = "10.0.0.0/16"
     protocol         = "1"
+  }
+  defined_tags = {
+    format("%s.%s", oci_identity_tag_namespace.common.name, oci_identity_tag_default.key_env.tag_definition_name)                = "prd"
+    format("%s.%s", oci_identity_tag_namespace.common.name, oci_identity_tag_default.key_managedbyterraform.tag_definition_name) = "true"
   }
 }
 
@@ -51,6 +59,10 @@ resource "oci_logging_log" "vcn_flow_logs" {
   }
   log_group_id       = oci_logging_log_group.lg_vcn_flow_logs.id
   retention_duration = 30
+  defined_tags = {
+    format("%s.%s", oci_identity_tag_namespace.common.name, oci_identity_tag_default.key_env.tag_definition_name)                = "prd"
+    format("%s.%s", oci_identity_tag_namespace.common.name, oci_identity_tag_default.key_managedbyterraform.tag_definition_name) = "true"
+  }
 }
 
 /************************************************************

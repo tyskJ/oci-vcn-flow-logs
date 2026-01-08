@@ -13,6 +13,7 @@
     ├── logs.tf               ログ関連定義ファイル
     ├── outputs.tf            リソース戻り値定義ファイル
     ├── providers.tf          プロバイダー定義ファイル
+    ├── tags.tf               デフォルトタグ定義ファイル
     ├── userdata
     │   └── oracle_init.sh    Linux用userdataスクリプト
     ├── variables.tf          変数定義ファイル
