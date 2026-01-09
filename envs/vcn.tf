@@ -5,6 +5,10 @@ resource "oci_core_vcn" "vcn" {
   compartment_id = oci_identity_compartment.workload.id
   cidr_block     = "10.0.0.0/16"
   display_name   = "vcn"
+  # 最大15文字の英数字
+  # 文字から始めること
+  # ハイフンとアンダースコアは使用不可
+  # 後から変更不可
   dns_label      = "vcn"
   defined_tags = {
     format("%s.%s", oci_identity_tag_namespace.common.name, oci_identity_tag_default.key_env.tag_definition_name)                = "prd"
@@ -33,6 +37,10 @@ resource "oci_core_subnet" "public" {
   vcn_id                     = oci_core_vcn.vcn.id
   cidr_block                 = "10.0.1.0/24"
   display_name               = "public"
+  # 最大15文字の英数字
+  # 文字から始めること
+  # ハイフンとアンダースコアは使用不可
+  # 後から変更不可
   dns_label                  = "public"
   security_list_ids          = [oci_core_security_list.sl.id]
   prohibit_internet_ingress  = false
