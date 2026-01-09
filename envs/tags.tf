@@ -47,6 +47,9 @@ resource "oci_identity_tag_default" "key_system" {
   compartment_id    = oci_identity_compartment.workload.id
   tag_definition_id = oci_identity_tag.key_system.id
   value             = "oci-vcn-flow-logs"
+  # TagがENUMでなく、値を固定しているためfalse
+  # リソース作成時に自動的に設定されるためfalse
+  # →trueにして、リソース作成時に強制明記させる必要がない
   is_required       = false
 }
 
@@ -63,3 +66,4 @@ resource "oci_identity_tag_default" "key_managedbyterraform" {
   value             = "true"
   is_required       = true
 }
+
