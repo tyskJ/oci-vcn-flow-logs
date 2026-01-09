@@ -105,6 +105,13 @@ resource "oci_core_instance" "oracle_instance" {
       oci_core_network_security_group.sg.id
     ]
     assign_public_ip = true
+    # 最大63文字 (Windowsは15文字)
+    # 英数字、ハイフンは使用可
+    # ピリオドは使用不可
+    # 先頭 or 末尾にハイフンは使用不可
+    # 数字のみになることは不可
+    # RFC952 及び RFC1123 に準拠する必要有
+    # 後から変更可
     hostname_label   = "oracle-instance"
   }
   is_pv_encryption_in_transit_enabled = true
