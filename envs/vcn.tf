@@ -43,6 +43,9 @@ resource "oci_core_subnet" "public" {
   # 後から変更不可
   dns_label                  = "public"
   security_list_ids          = [oci_core_security_list.sl.id]
+  # prohibit_internet_ingress と prohibit_public_ip_on_vnic は 同様の動き
+  # そのため、２つのパラメータの true/false を互い違いにするとconflictでエラーとなる
+  # 基本的には、値を揃えるか、どちらか一方を明記すること
   prohibit_internet_ingress  = false
   prohibit_public_ip_on_vnic = false
   defined_tags = {
