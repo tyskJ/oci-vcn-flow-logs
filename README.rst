@@ -139,7 +139,10 @@ OCI VCN Flow Logs で L4 レベルのトラフィックを可視化する
 .. code-block:: bash
 
   oci search resource structured-search \
-  --query-text "query all resources where compartmentId = 'コンパートメントOCID'"
+  --query-text "query all resources where compartmentId = 'コンパートメントOCID'" \
+  --profile ADMIN \
+  --auth security_token \
+  --query "data.items[].{identifier:identifier, resource_type:\"resource-type\"}"
 
 .. note::
 
