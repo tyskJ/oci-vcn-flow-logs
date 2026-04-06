@@ -10,7 +10,7 @@
     ├── compute.tf            OCI compute(Oracle Linux)定義ファイル
     ├── data.tf               外部データソース定義ファイル
     ├── locals.tf             ローカル変数定義ファイル
-    ├── logging.tf             ログ関連定義ファイル
+    ├── logging.tf            ログ関連定義ファイル
     ├── outputs.tf            リソース戻り値定義ファイル
     ├── providers.tf          プロバイダー定義ファイル
     ├── tags.tf               デフォルトタグ定義ファイル
